@@ -1,4 +1,4 @@
-#/node_modules
+/node_modules
 /jspm_packages
 
 /dist
@@ -30,7 +30,7 @@ yarn-debug.log*
 .yarn
 
 .vscode/
-#.idea/
+.idea/
 *.iml
 *.swp
 .DS_Store
