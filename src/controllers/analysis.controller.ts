@@ -14,9 +14,16 @@ export const uploadTranscript = async (req: Request, res: Response): Promise<Res
       throw new BadRequestError('No file uploaded.');
     }
 
-    const pdfFile = req.files.transcript as expressFileUpload.UploadedFile;
-    processNewTranscript(pdfFile);
+    const files = req.files.transcripts;
+    const transcripts = Array.isArray(files)
+      ? files
+      : ([req.files.transcripts].filter(Boolean) as Array<expressFileUpload.UploadedFile>);
 
+    if (!transcripts.length) {
+      throw new BadRequestError('No transcript file uploaded.');
+    }
+
+    transcripts.forEach((pdfFile) => processNewTranscript(pdfFile));
     return res.status(HttpStatusEnums.CREATED).send(HttpStatusMessage.OK);
   } catch (error) {
     console.error(`[uploadTranscript] - ${new Date()}`, error);

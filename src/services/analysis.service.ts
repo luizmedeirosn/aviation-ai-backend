@@ -63,14 +63,11 @@ const processNewTranscript = async (pdfFile: UploadedFile): Promise<void> => {
     console.info(`${methodKey} - ${new Date()} - success`, JSON.stringify(analysis));
   } catch (error) {
     console.error(`${methodKey} - ${new Date()}`, error);
-
     if (analysis && analysis.status === AnalysisStatus.PROCESSING) {
       analysis.status = AnalysisStatus.FAILED;
       analysis.updatedAt = new Date();
       await analysis.save();
     }
-
-    throw error;
   }
 };
 

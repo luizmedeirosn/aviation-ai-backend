@@ -12,8 +12,8 @@ export default abstract class BaseError extends Error {
     this._statusCode = statusCode || HttpStatusEnums.INTERNAL_SERVER_ERROR;
   }
 
-  public getMessage(): number {
-    return this._statusCode;
+  public getMessage(): string {
+    return this.message;
   }
 
   public getStatusCode(): number {
